@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cloud-eureka" />
+        <module name="cloud-service-consumer" />
+        <module name="cloud-service-provider" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cloud-eureka" target="1.8" />
+      <module name="cloud-service-consumer" target="1.8" />
+      <module name="cloud-service-provider" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
