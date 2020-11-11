@@ -3,8 +3,11 @@ server:
   port: 10086
 spring:
   application:
-    name: eureka-server # Ó¦ÓÃÃû³Æ£¬»áÔÚEurekaÖĞÏÔÊ¾È¥¡£
+    name: eureka-server
 eureka:
   client:
-    service-url: # EurekaServerµÄµØÖ·£¬ÏÖÔÚÊÇ×Ô¼ºµÄµØÖ·£¬Èç¹ûÊÇ¼¯Èº£¬ĞèÒª¼ÓÉÏÆäËüServerµÄµØÖ·°¡
-      defaultZone: http://127.0.0.1:${server.port}/eureka
+    service-url:
+      defaultZone: http://127.0.0.1:10087/eureka
+  server:
+    enable-self-preservation: false # å…³é—­è‡ªæˆ‘ä¿æŠ¤æ¨¡å¼ï¼ˆç¼ºçœä¸ºæ‰“å¼€ï¼‰
+    eviction-interval-timer-in-ms: 1000 # æ‰«æå¤±æ•ˆæœåŠ¡çš„é—´éš”æ—¶é—´ï¼ˆç¼ºçœä¸º60*1000msï¼‰
