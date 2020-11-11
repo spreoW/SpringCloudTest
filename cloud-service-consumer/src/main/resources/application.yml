@@ -7,4 +7,5 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:10086/eureka
+      defaultZone: http://localhost:10086/eureka,http://127.0.0.1:10087/eureka
+    registry-fetch-interval-seconds: 5 # 拉取Eureka Server服务的列表只读备份，然后缓存在本地。并且`每隔5秒`会重新获取并更新数据,默认30秒
