@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/cloud-eureka" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-service-consumer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-service-consumer/src/main/resources/application.yml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-service-provider" charset="UTF-8" />
   </component>
 </project>

@@ -8,4 +8,14 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:10086/eureka,http://127.0.0.1:10087/eureka
-    registry-fetch-interval-seconds: 5 # À­È¡Eureka Server·şÎñµÄÁĞ±íÖ»¶Á±¸·İ£¬È»ºó»º´æÔÚ±¾µØ¡£²¢ÇÒ`Ã¿¸ô5Ãë`»áÖØĞÂ»ñÈ¡²¢¸üĞÂÊı¾İ,Ä¬ÈÏ30Ãë
+    registry-fetch-interval-seconds: 5 # æ‹‰å–Eureka ServeræœåŠ¡çš„åˆ—è¡¨åªè¯»å¤‡ä»½ï¼Œç„¶åç¼“å­˜åœ¨æœ¬åœ°ã€‚å¹¶ä¸”`æ¯éš”5ç§’`ä¼šé‡æ–°è·å–å¹¶æ›´æ–°æ•°æ®,é»˜è®¤30ç§’
+service-provider:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000 # è®¾ç½®hystrixçš„è¶…æ—¶æ—¶é—´ä¸º6000ms

@@ -1,6 +1,8 @@
 package com.cloud.service.controller;
 
 import com.cloud.service.pojo.User;
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -19,6 +21,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("consumer/user")
+@DefaultProperties(defaultFallback = "fallBackMethod") // 指定一个类的全局熔断方法
 public class UserController {
 
     @Autowired
@@ -29,12 +32,23 @@ public class UserController {
 
     @GetMapping
     @ResponseBody
-    public User queryUserById(@RequestParam("id") Long id){
-        // 根据服务名称，获取服务实例，有可能是集群，所以是service实例集合
-        List<ServiceInstance> instances = discoveryClient.getInstances("service-provider");
-        ServiceInstance instance = instances.get(0);
-        String baseUrl = "http://" + instance.getHost() + ":" + instance.getPort() + "/user/" + id;
-        //return restTemplate.getForObject("http://localhost:8081/user/"+id,User.class);
-        return this.restTemplate.getForObject(baseUrl, User.class);
+    @HystrixCommand // 标记该方法需要熔断
+    public String queryUserById(@RequestParam("id") Long id){
+        String baseUrl = "http://service-provider/user/" + id;
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return this.restTemplate.getForObject(baseUrl, String.class);
+    }
+
+    /**
+     * 熔断方法
+     * 返回值要和被熔断的方法的返回值一致
+     * 熔断方法不需要参数
+     */
+    public String fallBackMethod(){
+        return  "请求繁忙，请稍后再试！";
     }
 }
