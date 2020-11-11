@@ -30,7 +30,7 @@ public class UserController {
     @GetMapping
     @ResponseBody
     public User queryUserById(@RequestParam("id") Long id){
-        // 根据服务名称，获取服务实例。有可能是集群，所以是service实例集合
+        // 根据服务名称，获取服务实例，有可能是集群，所以是service实例集合
         List<ServiceInstance> instances = discoveryClient.getInstances("service-provider");
         ServiceInstance instance = instances.get(0);
         String baseUrl = "http://" + instance.getHost() + ":" + instance.getPort() + "/user/" + id;
